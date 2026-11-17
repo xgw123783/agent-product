@@ -23,7 +23,7 @@ def main() -> int:
     tracked = run(["git", "ls-files"]).stdout.splitlines()
     check(".env 不在版本库", ".env" not in tracked)
     check(".env.example 存在且不含真实 key", (ROOT / ".env.example").exists() and
-          not re.search(r"DASHSCOPE_API_KEY=\S{10,}", (ROOT / ".env.example").read_text()))
+          not re.search(r"DASHSCOPE_API_KEY=\S{10,}", (ROOT / ".env.example").read_text(encoding="utf-8")))
     leaks = run(["git", "grep", "-nE", r"sk-[A-Za-z0-9_.-]{16,}", "--", ":!*.md", ":!.env.example"]).stdout
     check("仓库里没有形如 sk- 的密钥", leaks == "", leaks[:200])
     runs_tracked = [f for f in tracked if f.startswith("apps/agent-python/runs/") or f.startswith("runs/")]
