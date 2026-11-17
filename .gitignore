@@ -1,9 +1,10 @@
 .env
-runs/
+/runs/
+/apps/agent-python/runs/
 **/__pycache__/
 *.pyc
 .pytest_cache/
 .venv/
-apps/agent-python/.venv/
 .DS_Store
 *.egg-info/
+*.events.jsonl
